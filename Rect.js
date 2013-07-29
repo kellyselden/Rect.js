@@ -1,7 +1,5 @@
 function Rect(x1, y1, x2, y2, zindex) {
-	//JSCover bug doesn't allow prototypes
-	//function print() { return '[{0}, {1}, {2}, {3}]'.format(x1, y1, x2, y2) }
-	function print() { return '[' + x1 + ', ' + y1 + ', ' + x2 + ', ' + y2  + ']' }
+	function print() { return '[{0}, {1}, {2}, {3}]'.format(x1, y1, x2, y2) }
 	function testArea() {
 		if (x1 == x2) throw new Error('rectangle has zero width ' + print());
 		if (x1 > x2) throw new Error('rectangle has negative width ' + print());
