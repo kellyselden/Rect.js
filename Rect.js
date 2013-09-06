@@ -16,6 +16,9 @@ function Rect(x1, y1, x2, y2, zindex) {
 	this.setY1 = function(y) { y1 = y; testArea() }
 	this.setX2 = function(x) { x2 = x; testArea() }
 	this.setY2 = function(y) { y2 = y; testArea() }
+	this.clone = function() {
+		return new Rect(this.getX1(), this.getY1(), this.getX2(), this.getY2(), this.zindex);
+	}
 }
 Rect.subtractMultiple = function(r1s, r2s) {
 	if (r2s.length)
@@ -28,26 +31,26 @@ Rect.subtractMultiple = function(r1s, r2s) {
 				if (r1.zindex > r2.zindex) continue;
 				
 				var rects = [];
-				var cutR1 = Rect.clone(r1);
+				var cutR1 = r1.clone();
 				if (r1.getX1() < r2.getX1()) {
-					var left = Rect.clone(r1);
+					var left = r1.clone();
 					left.setX2(r2.getX1());
 					rects.push(left);
 					cutR1.setX1(left.getX1());
 				}
 				if (r1.getX2() > r2.getX2()) {
-					var right = Rect.clone(r1);
+					var right = r1.clone();
 					right.setX1(r2.getX2());
 					rects.push(right);
 					cutR1.setX2(right.getX2());
 				}
 				if (r1.getY1() < r2.getY1()) {
-					var top = Rect.clone(cutR1);
+					var top = cutR1.clone();
 					top.setY2(r2.getY1());
 					rects.push(top);
 				}
 				if (r1.getY2() > r2.getY2()) {
-					var bottom = Rect.clone(cutR1);
+					var bottom = cutR1.clone();
 					bottom.setY1(r2.getY2());
 					rects.push(bottom);
 				}
@@ -86,6 +89,3 @@ Rect.areEqual = function(r1, r2) {
 	// }
 	// return false;
 // }
-Rect.clone = function(rect) {
-	return new Rect(rect.getX1(), rect.getY1(), rect.getX2(), rect.getY2(), rect.zindex);
-}

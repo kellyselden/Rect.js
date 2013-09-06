@@ -67,7 +67,7 @@ test('Rect.getIntersect', function() {
 
 test('Rect.clone', function() {
 	var rect = new Rect(0, 0, 1, 1, 2);
-	deepEqual(Rect.clone(rect), rect);
+	deepEqual(rect.clone(), rect);
 });
 
 // test('Rect.contains not', function() {
